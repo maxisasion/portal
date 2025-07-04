@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>FX BULLS PRO - Advanced Trading Signals</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oxanium:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #f59e0b;
+      --primary-light: rgba(245, 158, 11, 0.1);
+      --secondary-color: #d97706;
+      --dark-bg: #0f172a;
+      --darker-bg: #020617;
+      --light-bg: #1e293b;
+      --lighter-bg: #334155;
+      --card-bg: #1e293b;
+      --card-border: rgba(255, 255, 255, 0.05);
+      --text-color: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-color: #fbbf24;
+      --success-color: #10b981;
+      --buy-color: #10b981;
+      --sell-color: #ef4444;
+      --warning-color: #f59e0b;
+      --fractal-color: #8b5cf6;
+      --ict-color: #ec4899;
+      --rsi-color: #f97316;
+      --ma-color: #22d3ee;
+      --border-radius: 16px;
+      --border-radius-sm: 8px;
+      --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+      --box-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    
+    body { 
+      background: var(--dark-bg); 
+      color: var(--text-color); 
+      min-height: 100vh;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 20%);
+    }
+    
+    /* Header Styles */
+    header { 
+      background: linear-gradient(135deg, var(--darker-bg), var(--dark-bg));
+      padding: 1rem 2rem; 
+      text-align: center;
+      font-weight: 700;
+      box-shadow: var(--box-shadow);
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-family: 'Oxanium', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .logo-icon {
+      font-size: 1.75rem;
+      background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .menu-btn {
+      background: var(--primary-light);
+      border: none;
+      color: var(--primary-color);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .menu-btn:hover {
+      background: rgba(245, 158, 11, 0.2);
+      transform: rotate(90deg);
+    }
+    
+    .live-badge {
+      background: linear-gradient(45deg, var(--sell-color), #f87171);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      animation: pulse 1.5s infinite;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .live-badge::before {
+      content: '';
+      display: block;
+      width: 0.5rem;
+      height: 0.5rem;
+      background: white;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+    
+    /* Main Container */
+    .container { 
+      max-width: 1400px; 
+      margin: 2rem auto; 
+      padding: 1.5rem; 
+    }
+    
+    .login-container, .dashboard { 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--box-shadow);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4 {
+      color: var(--accent-color);
+      font-weight: 700;
+      line-height: 1.3;
+      font-family: 'Oxanium', sans-serif;
+    }
+    
+    h2 { 
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+      border-radius: 3px;
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .text-muted {
+      color: var(--text-muted);
+    }
+    
+    /* Form Elements */
+    .input-group {
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+    
+    input, select, button { 
+      width: 100%;
+      padding: 0.875rem 1rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    
+    input, select { 
+      background: rgba(2, 6, 23, 0.5);
+      color: var(--text-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 500;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+    }
+    
+    input::placeholder {
+      color: var(--text-muted);
+    }
+    
+    button { 
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      color: var(--darker-bg);
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--box-shadow);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+      opacity: 0;
+      transition: var(--transition);
+      z-index: -1;
+    }
+    
+    button:hover::before {
+      opacity: 1;
+    }
+    
+    button:hover { 
+      transform: translateY(-2px);
+      box-shadow: var(--box-shadow-lg);
+    }
+    
+    button:active { 
+      transform: translateY(0); 
+    }
+    
+    button.secondary {
+      background: var(--light-bg);
+      color: var(--text-color);
+    }
+    
+    button.secondary::before {
+      background: var(--lighter-bg);
+    }
+    
+    button.danger {
+      background: linear-gradient(to right, var(--sell-color), #f87171);
+      color: white;
+    }
+    
+    button.danger::before {
+      background: linear-gradient(to right, #f87171, var(--sell-color));
+    }
+    
+    button.warning {
+      background: linear-gradient(to right, var(--warning-color), #fbbf24);
+      color: var(--darker-bg);
+    }
+    
+    /* Chart Container */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      border: 1px solid var(--card-border);
+    }
+    
+    #chartIframe { 
+      width: 100%; 
+      height: 500px; 
+      border: none;
+    }
+    
+    /* Signal Display */
+    .signal-display {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      margin: 1rem 0;
+      width: 100%;
+      border-left: 4px solid var(--accent-color);
+      box-shadow: var(--box-shadow);
+      border: 1px solid var(--card-border);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .signal-display::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.03), transparent);
+      pointer-events: none;
+    }
+    
+    .signal-status {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-family: 'Oxanium', sans-serif;
+    }
+    
+    .signal-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-top: 1rem;
+    }
+    
+    .signal-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(2, 6, 23, 0.5);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid var(--card-border);
+    }
+    
+    .signal-meta i {
+      color: var(--accent-color);
+    }
+    
+    /* Utility Classes */
+    .hidden { 
+      display: none !important; 
+    }
+    
+    .owner-info {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      text-align: center;
+      font-size: 0.875rem;
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid var(--card-border);
+    }
+    
+    .owner-info strong {
+      color: var(--accent-color);
+    }
+    
+    /* Action Buttons */
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .action-buttons button {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    /* Pairs Grid */
+    .pairs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem;
+      width: 100%;
+      margin: 1rem 0;
+    }
+    
+    .pair-card {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+      box-shadow: var(--box-shadow);
+      border: 1px solid var(--card-border);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pair-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), transparent);
+      pointer-events: none;
+    }
+    
+    .pair-card:hover {
+      border-color: var(--accent-color);
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-lg);
+    }
+    
+    .pair-card.active {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: var(--darker-bg);
+      font-weight: 600;
+      border-color: var(--primary-color);
+    }
+    
+    /* Timeframe Selector */
+    .timeframe-selector {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+    
+    .timeframe-btn {
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      background: var(--card-bg);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: var(--transition);
+      border: 1px solid var(--card-border);
+      min-width: 60px;
+      text-align: center;
+    }
+    
+    .timeframe-btn:hover {
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+    
+    .timeframe-btn.active {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: var(--darker-bg);
+      font-weight: 600;
+      border-color: var(--primary-color);
+      box-shadow: var(--box-shadow);
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 280px;
+      height: 100vh;
+      background: var(--dark-bg);
+      z-index: 1000;
+      transition: var(--transition);
+      padding: 1.5rem;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--card-border);
+    }
+    
+    .mobile-menu.show {
+      left: 0;
+    }
+    
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+    }
+    
+    .menu-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    
+    .menu-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+    
+    .menu-close:hover {
+      background: var(--primary-light);
+      color: var(--primary-color);
+    }
+    
+    .menu-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+      overflow-y: auto;
+    }
+    
+    .menu-item {
+      padding: 0.75rem 1rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border: 1px solid transparent;
+    }
+    
+    .menu-item:hover {
+      background: var(--primary-light);
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+    
+    .menu-item i {
+      width: 1.5rem;
+      text-align: center;
+      color: var(--accent-color);
+    }
+    
+    /* Strategy Indicators */
+    .strategy-indicator {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    
+    .fractal-indicator {
+      background: linear-gradient(45deg, var(--fractal-color), #7c3aed);
+      color: white;
+    }
+    
+    .ma-indicator {
+      background: linear-gradient(45deg, var(--ma-color), #0ea5e9);
+      color: white;
+    }
+    
+    .rsi-indicator {
+      background: linear-gradient(45deg, var(--rsi-color), #ea580c);
+      color: white;
+    }
+    
+    /* Confidence Meter */
+    .confidence-meter {
+      width: 100%;
+      height: 10px;
+      background: var(--light-bg);
+      border-radius: 5px;
+      margin-top: 0.5rem;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+    
+    .confidence-level {
+      height: 100%;
+      border-radius: 5px;
+      background: linear-gradient(to right, #ef4444, #f59e0b, #10b981);
+      transition: width 0.5s ease;
+    }
+    
+    /* Plans Section */
+    .plans-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+    
+    .plan-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      border: 2px solid transparent;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--card-border);
+    }
+    
+    .plan-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--box-shadow-lg);
+    }
+    
+    .plan-card.popular {
+      border-color: var(--accent-color);
+    }
+    
+    .popular-badge {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+      color: var(--darker-bg);
+      padding: 0.25rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .plan-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--accent-color);
+      font-family: 'Oxanium', sans-serif;
+    }
+    
+    .plan-price {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    
+    .plan-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+    
+    .plan-features li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .plan-features li i {
+      color: var(--accent-color);
+    }
+    
+    /* Performance Metrics */
+    .metrics-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      width: 100%;
+      margin: 1.5rem 0;
+    }
+    
+    .metric-card {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      box-shadow: var(--box-shadow);
+      border: 1px solid var(--card-border);
+      transition: var(--transition);
+    }
+    
+    .metric-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-lg);
+    }
+    
+    .metric-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin: 0.5rem 0;
+      font-family: 'Oxanium', sans-serif;
+    }
+    
+    .metric-label {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    
+    /* Strategy Selector */
+    .strategy-selector {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+    
+    .strategy-btn {
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      background: var(--card-bg);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: var(--transition);
+      border: 1px solid var(--card-border);
+      min-width: 120px;
+      text-align: center;
+    }
+    
+    .strategy-btn:hover {
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+    
+    .strategy-btn.active {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: var(--darker-bg);
+      font-weight: 600;
+      border-color: var(--primary-color);
+      box-shadow: var(--box-shadow);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      .login-container, .dashboard {
+        padding: 1.5rem 1rem;
+      }
+      
+      .pairs-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      }
+      
+      .action-buttons button {
+        min-width: 100%;
+      }
+      
+      .signal-details {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .plans-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .metrics-container {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .strategy-selector {
+        gap: 0.5rem;
+      }
+      
+      .strategy-btn {
+        min-width: 100px;
+        font-size: 0.8rem;
+        padding: 0.5rem;
+      }
+    }
+    
+    /* Notification */
+    .notification {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: var(--dark-bg);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow-lg);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: var(--transition);
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      max-width: 350px;
+      border: 1px solid var(--card-border);
+    }
+    
+    .notification.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .notification.success {
+      border-left: 4px solid var(--success-color);
+    }
+    
+    .notification.error {
+      border-left: 4px solid var(--sell-color);
+    }
+    
+    .notification.warning {
+      border-left: 4px solid var(--warning-color);
+    }
+    
+    .notification-close {
+      background: none;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      margin-left: auto;
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+    
+    .notification-close:hover {
+      opacity: 1;
+    }
+    
+    /* Indicators Section */
+    .indicators-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .indicator-tag {
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--border-radius-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Loading Animation */
+    .loading {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Premium Features Badge */
+    .premium-badge {
+      display: inline-block;
+      background: linear-gradient(45deg, #f59e0b, #ec4899);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--border-radius-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: var(--dark-bg);
+      color: #fff;
+      text-align: center;
+      border-radius: var(--border-radius);
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: var(--transition);
+      font-size: 0.8rem;
+      box-shadow: var(--box-shadow);
+      border: 1px solid var(--card-border);
+    }
+    
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    /* Signal Strength Indicator */
+    .signal-strength {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    .signal-bars {
+      display: flex;
+      gap: 2px;
+    }
+    
+    .signal-bar {
+      width: 4px;
+      height: 10px;
+      background: var(--text-muted);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    
+    .signal-bar.active {
+      background: var(--accent-color);
+    }
+    
+    /* Animated Background */
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    
+    /* TradingView Widget Customization */
+    .tv-embed-widget-wrapper {
+      border-radius: var(--border-radius) !important;
+    }
+    
+    /* Signal Strength Animation */
+    @keyframes signalPulse {
+      0% { opacity: 0.5; }
+      50% { opacity: 1; }
+      100% { opacity: 0.5; }
+    }
+    
+    /* Glow Effect */
+    .glow {
+      animation: glow 2s infinite alternate;
+    }
+    
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 5px rgba(245, 158, 11, 0.5);
+      }
+      to {
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+      }
+    }
+    
+    /* Floating Elements */
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* Status Indicator */
+    .status-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    
+    .status-active {
+      background: var(--success-color);
+      box-shadow: 0 0 8px var(--success-color);
+    }
+    
+    /* Progress Bar */
+    .progress-container {
+      width: 100%;
+      height: 6px;
+      background: var(--light-bg);
+      border-radius: 3px;
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+      transition: width 0.5s ease;
+    }
+    
+    /* Countdown Timer */
+    .countdown-timer {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+    
+    /* Signal Expiry Animation */
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    
+    .expiry-warning {
+      animation: blink 1s infinite;
+    }
+    
+    /* Market Status */
+    .market-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success-color);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    
+    .market-status.closed {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--sell-color);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+    
+    /* News Ticker */
+    .news-ticker {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      background: var(--card-bg);
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius-sm);
+      margin-bottom: 1rem;
+      border: 1px solid var(--card-border);
+    }
+    
+    .news-ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 20s linear infinite;
+    }
+    
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="animated-bg">
+    <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="gradient" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(245, 158, 11, 0.1)"></stop>
+          <stop offset="100%" stop-color="rgba(15, 23, 42, 0)"></stop>
+        </radialGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#gradient)"></rect>
+    </svg>
+  </div>
+
+  <header>
+    <button class="menu-btn" id="menuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="logo">
+      <i class="fas fa-bullhorn logo-icon"></i>
+      <span>FX BULLS PRO</span>
+    </div>
+    <div class="header-actions">
+      <div class="market-status" id="marketStatus">
+        <div class="status-indicator status-active"></div>
+        <span>Market Open</span>
+      </div>
+      <div class="live-badge" id="liveBadge">LIVE</div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="menu-header">
+      <h3>Menu</h3>
+      <button class="menu-close" id="menuClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="menu-items">
+      <div class="menu-item" onclick="showTab('signals')">
+        <i class="fas fa-signal"></i>
+        <span>Signals Dashboard</span>
+      </div>
+      <div class="menu-item" onclick="showTab('pairs')">
+        <i class="fas fa-coins"></i>
+        <span>Currency Pairs</span>
+      </div>
+      <div class="menu-item" onclick="showTab('timeframes')">
+        <i class="fas fa-clock"></i>
+        <span>Time Frames</span>
+      </div>
+      <div class="menu-item" onclick="showTab('strategies')">
+        <i class="fas fa-chess-knight"></i>
+        <span>Trading Strategies</span>
+      </div>
+      <div class="menu-item" onclick="showTab('performance')">
+        <i class="fas fa-chart-line"></i>
+        <span>Performance Metrics</span>
+      </div>
+      <div class="menu-item" onclick="deactivateLicense()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </div>
+    </div>
+  </div>
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <!-- Notification System -->
+  <div class="notification hidden" id="notification">
+    <div id="notification-icon"></div>
+    <div id="notification-message"></div>
+    <button class="notification-close" onclick="hideNotification()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Login Container -->
+  <div class="container login-container" id="login-container">
+    <div style="text-align: center; margin-bottom: 1rem;" class="floating">
+      <i class="fas fa-lock" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+      <h2>Activate Your Account</h2>
+      <p class="text-muted">Choose your plan and enter activation code</p>
+    </div>
+    
+    <div class="news-ticker">
+      <span>
+        <i class="fas fa-info-circle" style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+        SPECIAL OFFER: Get 10% discount on Premium Plan when paying via EFT | Contact us at 067 277 1746 for details
+      </span>
+    </div>
+    
+    <div class="plans-container">
+      <div class="plan-card">
+        <div class="plan-name">Basic Plan</div>
+        <div class="plan-price">R150 (once-off)</div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> 5 Major currency pairs</li>
+          <li><i class="fas fa-check"></i> 1H-4H timeframes</li>
+          <li><i class="fas fa-check"></i> Basic MA Strategy</li>
+          <li><i class="fas fa-check"></i> RSI Entry Points</li>
+          <li><i class="fas fa-check"></i> 5 signals per day</li>
+          <li><i class="fas fa-check"></i> Email support</li>
+          <li><i class="fas fa-check"></i> Basic risk management</li>
+        </ul>
+        <div class="input-group">
+          <input id="basicActivationCode" placeholder="Basic Plan Code" type="password" />
+        </div>
+        <button onclick="activatePlan('basic')" style="margin-top: 1rem;">
+          <i class="fas fa-unlock-alt"></i>
+          Activate Basic
+        </button>
+      </div>
+      
+      <div class="plan-card popular">
+        <div class="popular-badge">POPULAR</div>
+        <div class="plan-name">Pro Plan</div>
+        <div class="plan-price">R200 (once-off)</div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> 10 currency pairs</li>
+          <li><i class="fas fa-check"></i> 15M-1D timeframes</li>
+          <li><i class="fas fa-check"></i> Advanced MA Strategy</li>
+          <li><i class="fas fa-check"></i> RSI + MACD signals</li>
+          <li><i class="fas fa-check"></i> 10 signals per day</li>
+          <li><i class="fas fa-check"></i> Priority support</li>
+          <li><i class="fas fa-check"></i> Advanced risk management</li>
+          <li><i class="fas fa-check"></i> Basic price action alerts</li>
+          <li><i class="fas fa-check"></i> Weekly performance report</li>
+        </ul>
+        <div class="input-group">
+          <input id="proActivationCode" placeholder="Pro Plan Code" type="password" />
+        </div>
+        <button onclick="activatePlan('pro')" style="margin-top: 1rem;">
+          <i class="fas fa-unlock-alt"></i>
+          Activate Pro
+        </button>
+      </div>
+      
+      <div class="plan-card">
+        <div class="plan-name">Premium Plan</div>
+        <div class="plan-price">R300 (once-off)</div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> All pairs + indices + crypto</li>
+          <li><i class="fas fa-check"></i> 5M-1W timeframes</li>
+          <li><i class="fas fa-check"></i> Institutional MA Strategy</li>
+          <li><i class="fas fa-check"></i> Multi-indicator confirmation</li>
+          <li><i class="fas fa-check"></i> Unlimited signals</li>
+          <li><i class="fas fa-check"></i> VIP support</li>
+          <li><i class="fas fa-check"></i> Smart risk management</li>
+          <li><i class="fas fa-check"></i> Advanced price action alerts</li>
+          <li><i class="fas fa-check"></i> Daily performance report</li>
+          <li><i class="fas fa-check"></i> Personal mentor</li>
+          <li><i class="fas fa-check"></i> Early access to new features</li>
+        </ul>
+        <div class="input-group">
+          <input id="premiumActivationCode" placeholder="Premium Plan Code" type="password" />
+        </div>
+        <button onclick="activatePlan('premium')" style="margin-top: 1rem;">
+          <i class="fas fa-unlock-alt"></i>
+          Activate Premium
+        </button>
+      </div>
+    </div>
+    
+    <div class="owner-info">
+      <p><strong><i class="fas fa-user-tie"></i> Owner:</strong> FX BULLS TEAM</p>
+      <p><strong><i class="fas fa-phone"></i> Contact:</strong> 067 277 1746</p>
+      <p><strong><i class="fas fa-envelope"></i> Email:</strong> fxbulls1632@gmail.com</p>
+      <p><strong><i class="fas fa-globe"></i> Website:</strong> www.fxbulls.co.za</p>
+    </div>
+  </div>
+
+  <!-- Main Dashboard -->
+  <div class="container dashboard hidden" id="dashboard">
+    <!-- Signals Tab -->
+    <div id="signals-tab">
+      <div class="signal-display">
+        <div class="signal-status" id="signal-message"></div>
+        <div class="signal-strength">
+          <span>Signal Strength:</span>
+          <div class="signal-bars" id="signalBars">
+            <div class="signal-bar"></div>
+            <div class="signal-bar"></div>
+            <div class="signal-bar"></div>
+            <div class="signal-bar"></div>
+            <div class="signal-bar"></div>
+          </div>
+        </div>
+        <div class="indicators-section" id="indicators-section"></div>
+        <div class="signal-details" id="signal-details">
+          <div class="signal-meta">
+            <i class="fas fa-bullseye"></i>
+            <span>Confidence: <span id="confidence-value">0%</span></span>
+          </div>
+          <div class="confidence-meter">
+            <div class="confidence-level" id="confidence-meter"></div>
+          </div>
+          <div class="signal-meta">
+            <i class="fas fa-arrow-up"></i>
+            <span>Take Profit: <span id="take-profit">100</span> pips</span>
+          </div>
+          <div class="signal-meta">
+            <i class="fas fa-arrow-down"></i>
+            <span>Stop Loss: <span id="stop-loss">20</span> pips</span>
+          </div>
+          <div class="signal-meta">
+            <i class="fas fa-percentage"></i>
+            <span>Risk/Reward: <span id="risk-reward">1:5</span></span>
+          </div>
+          <div class="signal-meta">
+            <i class="fas fa-clock"></i>
+            <span>Expires: <span id="signal-expiry">1 hour</span></span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-container glow">
+        <iframe id="chartIframe"></iframe>
+      </div>
+      
+      <div class="action-buttons">
+        <button onclick="generateNewSignal()">
+          <i class="fas fa-sync-alt"></i>
+          New Signal
+        </button>
+        <button class="secondary" onclick="showTab('strategies')">
+          <i class="fas fa-chess-knight"></i>
+          Change Strategy
+        </button>
+        <button class="danger" onclick="deactivateLicense()">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout
+        </button>
+      </div>
+    </div>
+    
+    <!-- Pairs Tab -->
+    <div id="pairs-tab" class="hidden">
+      <h2>Currency Pairs Selection</h2>
+      <p class="text-muted" style="text-align: center; margin-bottom: 1.5rem;">
+        Select your preferred trading instruments
+      </p>
+      
+      <h3>Major Forex Pairs</h3>
+      <div class="pairs-grid" id="forexPairsGrid"></div>
+      
+      <h3>Global Indices</h3>
+      <div class="pairs-grid" id="indicesPairsGrid"></div>
+      
+      <h3>Cryptocurrencies</h3>
+      <div class="pairs-grid" id="cryptoPairsGrid"></div>
+      
+      <div class="action-buttons">
+        <button onclick="showTab('signals')">
+          <i class="fas fa-arrow-left"></i>
+          Back to Signals
+        </button>
+      </div>
+    </div>
+    
+    <!-- Timeframes Tab -->
+    <div id="timeframes-tab" class="hidden">
+      <h2>Time Frame Selection</h2>
+      <p class="text-muted" style="text-align: center; margin-bottom: 1.5rem;">
+        Select your preferred trading timeframe
+      </p>
+      
+      <div class="timeframe-selector">
+        <div class="timeframe-btn" onclick="changeTimeframe('5')">5M</div>
+        <div class="timeframe-btn" onclick="changeTimeframe('15')">15M</div>
+        <div class="timeframe-btn" onclick="changeTimeframe('30')">30M</div>
+        <div class="timeframe-btn" onclick="changeTimeframe('60')">1H</div>
+        <div class="timeframe-btn" onclick="changeTimeframe('240')">4H</div>
+        <div class="timeframe-btn" onclick="changeTimeframe('D')">1D</div>
+        <div class="timeframe-btn" onclick="changeTimeframe('W')">1W</div>
+      </div>
+      
+      <div class="action-buttons">
+        <button onclick="showTab('signals')">
+          <i class="fas fa-arrow-left"></i>
+          Back to Signals
+        </button>
+      </div>
+    </div>
+    
+    <!-- Strategies Tab -->
+    <div id="strategies-tab" class="hidden">
+      <h2>Trading Strategies</h2>
+      <p class="text-muted" style="text-align: center; margin-bottom: 1.5rem;">
+        Select your preferred trading strategy based on your risk profile
+      </p>
+      
+      <div class="strategy-selector">
+        <div class="strategy-btn" onclick="changeStrategy('ma')">
+          MA Crossover <span class="tooltip"><i class="fas fa-info-circle"></i>
+            <span class="tooltiptext">Uses 20MA and 15MA crossovers with RSI confirmation</span>
+          </span>
+        </div>
+        <div class="strategy-btn" onclick="changeStrategy('rsi')">
+          RSI Bounce <span class="tooltip"><i class="fas fa-info-circle"></i>
+            <span class="tooltiptext">Identifies overbought/oversold conditions with RSI bounce</span>
+          </span>
+        </div>
+        <div class="strategy-btn" onclick="changeStrategy('macd')" id="macdStrategyBtn">
+          MACD Divergence <span class="premium-badge">PRO</span>
+          <span class="tooltip"><i class="fas fa-info-circle"></i>
+            <span class="tooltiptext">Identifies MACD histogram divergence for reversals</span>
+          </span>
+        </div>
+        <div class="strategy-btn" onclick="changeStrategy('fractal')" id="fractalStrategyBtn">
+          Fractal Breakout <span class="premium-badge">PREMIUM</span>
+          <span class="tooltip"><i class="fas fa-info-circle"></i>
+            <span class="tooltiptext">Uses fractal patterns for breakout trades</span>
+          </span>
+        </div>
+        <div class="strategy-btn" onclick="changeStrategy('ict')" id="ictStrategyBtn">
+          ICT Concepts <span class="premium-badge">PREMIUM</span>
+          <span class="tooltip"><i class="fas fa-info-circle"></i>
+            <span class="tooltiptext">Uses institutional order flow concepts</span>
+          </span>
+        </div>
+      </div>
+      
+      <div class="signal-display" style="margin-top: 1.5rem;">
+        <h3 style="color: var(--accent-color); margin-bottom: 1rem;">Strategy Description</h3>
+        <div id="strategy-description">
+          <p>Select a strategy to view its detailed description and trading methodology.</p>
+        </div>
+      </div>
+      
+      <div class="action-buttons">
+        <button onclick="showTab('signals')">
+          <i class="fas fa-arrow-left"></i>
+          Back to Signals
+        </button>
+      </div>
+    </div>
+    
+    <!-- Performance Tab -->
+    <div id="performance-tab" class="hidden">
+      <h2>Performance Metrics</h2>
+      <p class="text-muted" style="text-align: center; margin-bottom: 1.5rem;">
+        Track your trading performance with detailed analytics
+      </p>
+      
+      <div class="metrics-container">
+        <div class="metric-card">
+          <div class="metric-label">Win Rate</div>
+          <div class="metric-value" id="win-rate">75%</div>
+          <div class="metric-label">Last 30 Days</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Avg. Profit</div>
+          <div class="metric-value" id="avg-profit">42 pips</div>
+          <div class="metric-label">Per Trade</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Risk/Reward</div>
+          <div class="metric-value" id="avg-risk-reward">1:3.2</div>
+          <div class="metric-label">Average</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Max Drawdown</div>
+          <div class="metric-value" id="max-drawdown">8.5%</div>
+          <div class="metric-label">Last 30 Days</div>
+        </div>
+      </div>
+      
+      <div class="signal-display" style="margin-top: 1.5rem;">
+        <h3 style="color: var(--accent-color); margin-bottom: 1rem;">Recent Signals Performance</h3>
+        <div id="performance-chart" style="height: 300px; width: 100%;">
+          <!-- This would be replaced with an actual chart in a real implementation -->
+          <div style="display: flex; height: 100%; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: var(--border-radius);">
+            <p style="color: var(--text-color);">Performance chart would display here</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="action-buttons">
+        <button onclick="showTab('signals')">
+          <i class="fas fa-arrow-left"></i>
+          Back to Signals
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configuration
+    const validActivationCodes = {
+      basic: "BULLS500",
+      pro: "BULLS1000",
+      premium: "BULLS2000"
+    };
+    
+    const planLimitations = {
+      basic: {
+        pairs: ['EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD', 'USDCAD'],
+        timeframes: ['60', '240'],
+        strategies: ['ma', 'rsi'],
+        maxSignals: 5,
+        riskManagement: 'basic',
+        support: 'email',
+        indicators: ['RSI(14)', 'MA(20)', 'MA(15)'],
+        performanceStats: false,
+        priceAction: false
+      },
+      pro: {
+        pairs: ['EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD', 'USDCAD', 'USDCHF', 'NZDUSD', 'EURGBP', 'EURJPY', 'GBPJPY'],
+        timeframes: ['15', '30', '60', '240', 'D'],
+        strategies: ['ma', 'rsi', 'macd'],
+        maxSignals: 10,
+        riskManagement: 'advanced',
+        support: 'priority',
+        indicators: ['RSI(14)', 'MA(20)', 'MA(15)', 'MACD'],
+        performanceStats: true,
+        priceAction: 'basic'
+      },
+      premium: {
+        pairs: ['EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD', 'USDCAD', 'USDCHF', 'NZDUSD', 'EURGBP', 'EURJPY', 'GBPJPY', 
+               'US30', 'NAS100', 'SPX500', 'DAX40', 'FTSE100', 'BTCUSD', 'ETHUSD', 'XRPUSD', 'LTCUSD', 'BCHUSD'],
+        timeframes: ['5', '15', '30', '60', '240', 'D', 'W'],
+        strategies: ['ma', 'rsi', 'macd', 'fractal', 'ict'],
+        maxSignals: Infinity,
+        riskManagement: 'smart',
+        support: 'vip',
+        indicators: ['RSI(14)', 'MA(20)', 'MA(15)', 'MACD', 'Fractals', 'Volume'],
+        performanceStats: true,
+        priceAction: 'advanced'
+      }
+    };
+    
+    // Strategy descriptions
+    const strategyDescriptions = {
+      ma: `
+        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">MA Crossover Strategy</h4>
+        <p>This strategy uses two moving averages (20-period and 15-period) to identify trend direction and potential entry points.</p>
+        <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+          <li><strong>Buy Signal:</strong> When the 15MA crosses above the 20MA and RSI is below 30</li>
+          <li><strong>Sell Signal:</strong> When the 15MA crosses below the 20MA and RSI is above 70</li>
+          <li><strong>Confirmation:</strong> Both MAs should be trending in the same direction</li>
+        </ul>
+        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+          <i class="fas fa-info-circle"></i> Best suited for trending markets on 1H-4H timeframes
+        </div>
+      `,
+      rsi: `
+        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">RSI Bounce Strategy</h4>
+        <p>This strategy identifies overbought and oversold conditions using the Relative Strength Index (RSI).</p>
+        <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+          <li><strong>Buy Signal:</strong> RSI crosses above 30 from below (oversold bounce)</li>
+          <li><strong>Sell Signal:</strong> RSI crosses below 70 from above (overbought rejection)</li>
+          <li><strong>Confirmation:</strong> Price should be in a clear trend (use MA for confirmation)</li>
+        </ul>
+        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+          <i class="fas fa-info-circle"></i> Works well in ranging markets on 15M-1H timeframes
+        </div>
+      `,
+      macd: `
+        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">MACD Divergence Strategy</h4>
+        <p>This strategy looks for divergences between price and MACD histogram to identify potential reversals.</p>
+        <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+          <li><strong>Buy Signal:</strong> Price makes lower low but MACD makes higher low (bullish divergence)</li>
+          <li><strong>Sell Signal:</strong> Price makes higher high but MACD makes lower high (bearish divergence)</li>
+          <li><strong>Confirmation:</strong> Look for RSI in neutral territory (40-60) during divergence</li>
+        </ul>
+        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+          <i class="fas fa-info-circle"></i> Most effective on 1H-4H timeframes with clear trends
+        </div>
+      `,
+      fractal: `
+        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Fractal Breakout Strategy</h4>
+        <p>This strategy identifies fractal patterns (swing highs/lows) and trades breakouts from these levels.</p>
+        <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+          <li><strong>Buy Signal:</strong> Break above bearish fractal with increasing volume</li>
+          <li><strong>Sell Signal:</strong> Break below bullish fractal with increasing volume</li>
+          <li><strong>Confirmation:</strong> RSI should not be in extreme territory during breakout</li>
+        </ul>
+        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+          <i class="fas fa-info-circle"></i> Works across all timeframes but best on 15M-1H
+        </div>
+      `,
+      ict: `
+        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">ICT Concepts Strategy</h4>
+        <p>This advanced strategy uses institutional order flow concepts from Inner Circle Trader methodology.</p>
+        <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+          <li><strong>Buy Signal:</strong> Liquidity sweep below support followed by bullish order block</li>
+          <li><strong>Sell Signal:</strong> Liquidity sweep above resistance followed by bearish order block</li>
+          <li><strong>Confirmation:</strong> Look for FVG (Fair Value Gap) and market structure shift</li>
+        </ul>
+        <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+          <i class="fas fa-info-circle"></i> Requires understanding of market structure - best on 15M-1H timeframes
+        </div>
+      `
+    };
+    
+    // Trading pairs by category
+    const pairsByCategory = {
+      forex: [
+        'EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD', 'USDCAD', 
+        'USDCHF', 'NZDUSD', 'EURGBP', 'EURJPY', 'GBPJPY'
+      ],
+      indices: [
+        'US30', 'NAS100', 'SPX500', 'DAX40', 'FTSE100'
+      ],
+      crypto: [
+        'BTCUSD', 'ETHUSD', 'XRPUSD', 'LTCUSD', 'BCHUSD'
+      ]
+    };
+    
+    // Current settings
+    let currentPlan = null;
+    let currentPair = 'EURUSD';
+    let currentTimeframe = '60';
+    let currentCategory = 'forex';
+    let currentStrategy = 'ma';
+    let signalsToday = 0;
+    let notificationTimeout;
+
+    function showNotification(message, type = 'success') {
+      const notification = document.getElementById('notification');
+      const notificationIcon = document.getElementById('notification-icon');
+      const notificationMessage = document.getElementById('notification-message');
+      
+      // Clear any existing timeout
+      if (notificationTimeout) {
+        clearTimeout(notificationTimeout);
+      }
+      
+      // Set notification content
+      notification.className = `notification ${type} show`;
+      
+      // Set icon based on type
+      if (type === 'success') {
+        notificationIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+      } else if (type === 'error') {
+        notificationIcon.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
+      } else if (type === 'warning') {
+        notificationIcon.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
+      }
+      
+      notificationMessage.textContent = message;
+      
+      // Auto-hide after 5 seconds
+      notificationTimeout = setTimeout(() => {
+        hideNotification();
+      }, 5000);
+    }
+    
+    function hideNotification() {
+      const notification = document.getElementById('notification');
+      notification.classList.remove('show');
+    }
+    
+    function activatePlan(planType) {
+      const codeInputId = `${planType}ActivationCode`;
+      const code = document.getElementById(codeInputId).value;
+      
+      if (!code) {
+        showNotification('Please enter an activation code', 'error');
+        return;
+      }
+      
+      // Show loading state
+      const btn = document.querySelector(`#login-container button[onclick="activatePlan('${planType}')"]`);
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span class="loading"></span> Authenticating...';
+      btn.disabled = true;
+      
+      // Simulate network request
+      setTimeout(() => {
+        if(code === validActivationCodes[planType]) {
+          currentPlan = planType;
+          localStorage.setItem("activatedPlan", planType);
+          document.getElementById("login-container").classList.add("hidden");
+          document.getElementById("dashboard").classList.remove("hidden");
+          document.getElementById("liveBadge").style.display = 'inline-flex';
+          
+          initDashboard();
+          showNotification(`${planType.charAt(0).toUpperCase() + planType.slice(1)} plan activated successfully!`, 'success');
+        } else {
+          showNotification('Invalid activation code. Please try again.', 'error');
+        }
+        
+        // Reset button
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }, 1500);
+    }
+
+    function deactivateLicense() { 
+      showNotification('Logged out successfully', 'success');
+      localStorage.removeItem("activatedPlan"); 
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    }
+    
+    function showTab(tabId) {
+      // Hide all tabs
+      document.querySelectorAll('#dashboard > div[id$="-tab"]').forEach(tab => {
+        tab.classList.add('hidden');
+      });
+      
+      // Show selected tab
+      document.getElementById(`${tabId}-tab`).classList.remove('hidden');
+      
+      // Close menu if on mobile
+      toggleMenu(false);
+      
+      // Generate signal when showing signals tab
+      if (tabId === 'signals') {
+        generateNewSignal();
+      }
+      
+      // Update strategy description when showing strategies tab
+      if (tabId === 'strategies') {
+        document.getElementById('strategy-description').innerHTML = strategyDescriptions[currentStrategy];
+      }
+    }
+    
+    function initDashboard() {
+      // Set initial timeframe based on plan
+      currentTimeframe = planLimitations[currentPlan].timeframes[0];
+      
+      // Highlight initial timeframe button
+      document.querySelectorAll('.timeframe-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if(btn.textContent === getTimeframeName(currentTimeframe)) {
+          btn.classList.add('active');
+        }
+      });
+      
+      // Highlight initial strategy button
+      document.querySelectorAll('.strategy-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`.strategy-btn[onclick="changeStrategy('${currentStrategy}')"]`).classList.add('active');
+      
+      // Disable strategy buttons based on plan
+      if (currentPlan !== 'premium') {
+        document.getElementById('fractalStrategyBtn').style.opacity = '0.5';
+        document.getElementById('fractalStrategyBtn').style.pointerEvents = 'none';
+        document.getElementById('ictStrategyBtn').style.opacity = '0.5';
+        document.getElementById('ictStrategyBtn').style.pointerEvents = 'none';
+      }
+      if (currentPlan === 'basic') {
+        document.getElementById('macdStrategyBtn').style.opacity = '0.5';
+        document.getElementById('macdStrategyBtn').style.pointerEvents = 'none';
+      }
+      
+      loadAllPairs();
+      updateChart();
+      generateNewSignal();
+      
+      // Setup menu toggle
+      document.getElementById('menuBtn').addEventListener('click', function() { toggleMenu(true); });
+      document.getElementById('menuClose').addEventListener('click', function() { toggleMenu(false); });
+      document.getElementById('menuOverlay').addEventListener('click', function() { toggleMenu(false); });
+      
+      // Update market status randomly (simulation)
+      updateMarketStatus();
+      setInterval(updateMarketStatus, 300000); // Update every 5 minutes
+    }
+    
+    function updateMarketStatus() {
+      const marketStatus = document.getElementById('marketStatus');
+      const isOpen = Math.random() > 0.2; // 80% chance market is open
+      
+      if (isOpen) {
+        marketStatus.innerHTML = `
+          <div class="status-indicator status-active"></div>
+          <span>Market Open</span>
+        `;
+        marketStatus.classList.remove('closed');
+      } else {
+        marketStatus.innerHTML = `
+          <div class="status-indicator"></div>
+          <span>Market Closed</span>
+        `;
+        marketStatus.classList.add('closed');
+      }
+    }
+    
+    function toggleMenu(show) {
+      if (typeof show === 'boolean') {
+        if (show) {
+          document.getElementById('mobileMenu').classList.add('show');
+          document.getElementById('menuOverlay').classList.add('show');
+        } else {
+          document.getElementById('mobileMenu').classList.remove('show');
+          document.getElementById('menuOverlay').classList.remove('show');
+        }
+      } else {
+        // Toggle if no parameter passed
+        document.getElementById('mobileMenu').classList.toggle('show');
+        document.getElementById('menuOverlay').classList.toggle('show');
+      }
+    }
+    
+    function loadAllPairs() {
+      // Load forex pairs
+      const forexGrid = document.getElementById("forexPairsGrid");
+      forexGrid.innerHTML = '';
+      pairsByCategory.forex.forEach(pair => {
+        if(!planLimitations[currentPlan].pairs.includes(pair)) return;
+        
+        const pairCard = document.createElement('div');
+        pairCard.className = 'pair-card';
+        if (pair === currentPair && currentCategory === 'forex') pairCard.classList.add('active');
+        pairCard.textContent = pair;
+        pairCard.onclick = function() {
+          currentPair = pair;
+          currentCategory = 'forex';
+          updateChart();
+          showTab('signals');
+        };
+        forexGrid.appendChild(pairCard);
+      });
+      
+      // Load indices pairs
+      const indicesGrid = document.getElementById("indicesPairsGrid");
+      indicesGrid.innerHTML = '';
+      pairsByCategory.indices.forEach(pair => {
+        if(!planLimitations[currentPlan].pairs.includes(pair)) return;
+        
+        const pairCard = document.createElement('div');
+        pairCard.className = 'pair-card';
+        if (pair === currentPair && currentCategory === 'indices') pairCard.classList.add('active');
+        pairCard.textContent = pair;
+        pairCard.onclick = function() {
+          currentPair = pair;
+          currentCategory = 'indices';
+          updateChart();
+          showTab('signals');
+        };
+        indicesGrid.appendChild(pairCard);
+      });
+      
+      // Load crypto pairs
+      const cryptoGrid = document.getElementById("cryptoPairsGrid");
+      cryptoGrid.innerHTML = '';
+      pairsByCategory.crypto.forEach(pair => {
+        if(!planLimitations[currentPlan].pairs.includes(pair)) return;
+        
+        const pairCard = document.createElement('div');
+        pairCard.className = 'pair-card';
+        if (pair === currentPair && currentCategory === 'crypto') pairCard.classList.add('active');
+        pairCard.textContent = pair;
+        pairCard.onclick = function() {
+          currentPair = pair;
+          currentCategory = 'crypto';
+          updateChart();
+          showTab('signals');
+        };
+        cryptoGrid.appendChild(pairCard);
+      });
+    }
+    
+    function updateChart() {
+      let symbol;
+      
+      // Handle different symbol formats for different categories
+      if (currentCategory === 'crypto') {
+        symbol = `BINANCE:${currentPair}`;
+      } else if (currentCategory === 'indices') {
+        symbol = currentPair.includes('US30') ? 'TVC:DOW' :
+                currentPair.includes('NAS100') ? 'TVC:NAS100' :
+                currentPair.includes('SPX500') ? 'TVC:SPX' :
+                `TVC:${currentPair}`;
+      } else {
+        symbol = `OANDA:${currentPair}`;
+      }
+      
+      // Add indicators to the chart based on current strategy
+      let indicators = planLimitations[currentPlan].indicators;
+      
+      const src = `https://s.tradingview.com/widgetembed/?symbol=${symbol}&interval=${currentTimeframe}&theme=dark&style=1&timezone=Africa%2FJohannesburg&hide_side_toolbar=true&studies=${indicators.join(",")}`;
+      document.getElementById("chartIframe").src = src;
+    }
+    
+    function changeTimeframe(tf) {
+      if(!planLimitations[currentPlan].timeframes.includes(tf)) {
+        showNotification(`This timeframe is not available in your ${currentPlan} plan`, 'warning');
+        return;
+      }
+      
+      currentTimeframe = tf;
+      
+      // Update timeframe buttons
+      document.querySelectorAll('.timeframe-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if(btn.textContent === getTimeframeName(tf)) {
+          btn.classList.add('active');
+        }
+      });
+      
+      updateChart();
+      showTab('signals');
+    }
+    
+    function changeStrategy(strategy) {
+      if(!planLimitations[currentPlan].strategies.includes(strategy)) {
+        showNotification(`This strategy is not available in your ${currentPlan} plan`, 'warning');
+        return;
+      }
+      
+      currentStrategy = strategy;
+      
+      // Update strategy buttons
+      document.querySelectorAll('.strategy-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`.strategy-btn[onclick="changeStrategy('${strategy}')"]`).classList.add('active');
+      
+      // Update strategy description
+      document.getElementById('strategy-description').innerHTML = strategyDescriptions[strategy];
+      
+      updateChart();
+      generateNewSignal();
+    }
+
+    function generateNewSignal() {
+      // Check signal limits for basic/pro plans
+      if (currentPlan !== 'premium' && signalsToday >= planLimitations[currentPlan].maxSignals) {
+        showNotification(`You've reached your daily signal limit (${planLimitations[currentPlan].maxSignals}). Upgrade to Premium for unlimited signals.`, 'warning');
+        return;
+      }
+      
+      const signalMessage = document.getElementById("signal-message");
+      const indicatorsSection = document.getElementById("indicators-section");
+      
+      // Generate values based on current strategy
+      let signalType, signalColor, signalReason = [];
+      let confidence = 70; // Base confidence
+      let rsiValue, ma20Trend, ma15Trend, macdHist, macdSignal, fractalPattern, orderFlow;
+      
+      // Common indicators
+      rsiValue = Math.floor(Math.random() * 100);
+      ma20Trend = Math.random() > 0.5 ? 'up' : 'down';
+      ma15Trend = Math.random() > 0.5 ? 'up' : 'down';
+      
+      // Strategy-specific indicators
+      if (currentStrategy === 'macd' || currentStrategy === 'ict') {
+        macdHist = (Math.random() * 0.5 - 0.25).toFixed(3);
+        macdSignal = (Math.random() * 0.5 - 0.25).toFixed(3);
+      }
+      
+      if (currentStrategy === 'fractal' || currentStrategy === 'ict') {
+        fractalPattern = Math.random() > 0.5 ? 'bullish' : 'bearish';
+      }
+      
+      if (currentStrategy === 'ict') {
+        orderFlow = Math.random() > 0.5 ? 'buying pressure' : 'selling pressure';
+      }
+      
+      // Determine signal based on strategy
+      switch(currentStrategy) {
+        case 'ma':
+          // MA Crossover Strategy
+          if (ma20Trend === 'up' && ma15Trend === 'up' && rsiValue <= 20) {
+            signalType = 'BUY';
+            signalColor = 'var(--buy-color)';
+            signalReason.push('20MA & 15MA trending up with RSI <= 20');
+            confidence = 80;
+          } else if (ma20Trend === 'down' && ma15Trend === 'down' && rsiValue >= 80) {
+            signalType = 'SELL';
+            signalColor = 'var(--sell-color)';
+            signalReason.push('20MA & 15MA trending down with RSI >= 80');
+            confidence = 80;
+          } else {
+            signalType = 'NO TRADE';
+            signalColor = 'var(--warning-color)';
+            signalReason.push('No MA crossover with RSI confirmation');
+            confidence = 30;
+          }
+          break;
+          
+        case 'rsi':
+          // RSI Bounce Strategy
+          if (rsiValue <= 10) {
+            signalType = 'BUY';
+            signalColor = 'var(--buy-color)';
+            signalReason.push('RSI at 10 (oversold)');
+            confidence = 85;
+          } else if (rsiValue >= 90) {
+            signalType = 'SELL';
+            signalColor = 'var(--sell-color)';
+            signalReason.push('RSI at 90 (overbought)');
+            confidence = 85;
+          } else if (rsiValue <= 30 && ma20Trend === 'up') {
+            signalType = 'BUY';
+            signalColor = 'var(--buy-color)';
+            signalReason.push('RSI bounce from 30 with uptrend');
+            confidence = 75;
+          } else if (rsiValue >= 70 && ma20Trend === 'down') {
+            signalType = 'SELL';
+            signalColor = 'var(--sell-color)';
+            signalReason.push('RSI bounce from 70 with downtrend');
+            confidence = 75;
+          } else {
+            signalType = 'NO TRADE';
+            signalColor = 'var(--warning-color)';
+            signalReason.push('No RSI bounce signal');
+            confidence = 30;
+          }
+          break;
+          
+        case 'macd':
+          // MACD Divergence Strategy
+          if (macdHist > 0 && macdHist > macdSignal && rsiValue <= 30) {
+            signalType = 'BUY';
+            signalColor = 'var(--buy-color)';
+            signalReason.push('MACD bullish crossover with RSI <= 30');
+            confidence = 85;
+          } else if (macdHist < 0 && macdHist < macdSignal && rsiValue >= 70) {
+            signalType = 'SELL';
+            signalColor = 'var(--sell-color)';
+            signalReason.push('MACD bearish crossover with RSI >= 70');
+            confidence = 85;
+          } else {
+            signalType = 'NO TRADE';
+            signalColor = 'var(--warning-color)';
+            signalReason.push('No MACD divergence signal');
+            confidence = 30;
+          }
+          break;
+          
+        case 'fractal':
+          // Fractal Breakout Strategy
+          if (fractalPattern === 'bullish' && rsiValue <= 40) {
+            signalType = 'BUY';
+            signalColor = 'var(--buy-color)';
+            signalReason.push('Bullish fractal pattern with RSI <= 40');
+            confidence = 90;
+          } else if (fractalPattern === 'bearish' && rsiValue >= 60) {
+            signalType = 'SELL';
+            signalColor = 'var(--sell-color)';
+            signalReason.push('Bearish fractal pattern with RSI >= 60');
+            confidence = 90;
+          } else {
+            signalType = 'NO TRADE';
+            signalColor = 'var(--warning-color)';
+            signalReason.push('No fractal breakout signal');
+            confidence = 30;
+          }
+          break;
+          
+        case 'ict':
+          // ICT Concepts Strategy
+          if (orderFlow === 'buying pressure' && fractalPattern === 'bullish' && rsiValue <= 35) {
+            signalType = 'BUY';
+            signalColor = 'var(--buy-color)';
+            signalReason.push('Institutional buying pressure with bullish fractal and RSI <= 35');
+            confidence = 95;
+          } else if (orderFlow === 'selling pressure' && fractalPattern === 'bearish' && rsiValue >= 65) {
+            signalType = 'SELL';
+            signalColor = 'var(--sell-color)';
+            signalReason.push('Institutional selling pressure with bearish fractal and RSI >= 65');
+            confidence = 95;
+          } else {
+            signalType = 'NO TRADE';
+            signalColor = 'var(--warning-color)';
+            signalReason.push('No institutional order flow signal');
+            confidence = 30;
+          }
+          break;
+      }
+      
+      // Adjust confidence based on plan (better signals for higher plans)
+      if (currentPlan === 'pro') confidence = Math.min(100, confidence + 5);
+      if (currentPlan === 'premium') confidence = Math.min(100, confidence + 10);
+      
+      // Calculate TP/SL based on confidence and strategy
+      let takeProfit, stopLoss, riskReward;
+      if (signalType === 'BUY' || signalType === 'SELL') {
+        const baseTP = currentStrategy === 'ict' ? 150 : 
+                      currentStrategy === 'fractal' ? 120 : 100;
+        const baseSL = currentStrategy === 'ict' ? 15 : 
+                       currentStrategy === 'fractal' ? 20 : 25;
+                       
+        takeProfit = Math.round(baseTP * (confidence / 100));
+        stopLoss = Math.round(baseSL * (1 - (confidence / 200)));
+        riskReward = `1:${(takeProfit / stopLoss).toFixed(1)}`;
+        
+        // Increment signal count
+        signalsToday++;
+      } else {
+        takeProfit = 0;
+        stopLoss = 0;
+        riskReward = '1:0';
+      }
+      
+      // Update signal strength bars
+      const signalBars = document.getElementById('signalBars');
+      signalBars.innerHTML = '';
+      const activeBars = Math.ceil(confidence / 20);
+      for (let i = 0; i < 5; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'signal-bar';
+        if (i < activeBars) {
+          bar.classList.add('active');
+          bar.style.height = `${10 + (i * 2)}px`; // Make bars progressively taller
+        }
+        signalBars.appendChild(bar);
+      }
+      
+      // Update display
+      signalMessage.innerHTML = `
+        <span style="color: ${signalColor}; font-size: 1.75rem;">
+          ${signalType} SIGNAL - ${currentPair} (${getTimeframeName(currentTimeframe)})
+        </span>
+        ${signalType !== 'NO TRADE' ? `<div style="font-size: 0.9rem; margin-top: 0.5rem; color: #d4d4d4;">Strategy: ${currentStrategy.toUpperCase()}</div>` : ''}
+      `;
+      
+      // Update indicators section
+      indicatorsSection.innerHTML = '';
+      
+      // Add common indicators
+      const rsiIndicator = document.createElement('div');
+      rsiIndicator.className = 'indicator-tag rsi-indicator';
+      rsiIndicator.innerHTML = `RSI: ${rsiValue}`;
+      indicatorsSection.appendChild(rsiIndicator);
+      
+      const ma20Indicator = document.createElement('div');
+      ma20Indicator.className = 'indicator-tag ma-indicator';
+      ma20Indicator.innerHTML = `MA(20): ${ma20Trend === 'up' ? '↑' : '↓'}`;
+      indicatorsSection.appendChild(ma20Indicator);
+      
+      // Add strategy-specific indicators
+      if (currentStrategy === 'macd' || currentStrategy === 'ict') {
+        const macdIndicator = document.createElement('div');
+        macdIndicator.className = 'indicator-tag fractal-indicator';
+        macdIndicator.innerHTML = `MACD: ${macdHist > 0 ? '+' : ''}${macdHist}`;
+        indicatorsSection.appendChild(macdIndicator);
+      }
+      
+      if (currentStrategy === 'fractal' || currentStrategy === 'ict') {
+        const fractalIndicator = document.createElement('div');
+        fractalIndicator.className = 'indicator-tag fractal-indicator';
+        fractalIndicator.innerHTML = `Fractal: ${fractalPattern}`;
+        indicatorsSection.appendChild(fractalIndicator);
+      }
+      
+      if (currentStrategy === 'ict') {
+        const flowIndicator = document.createElement('div');
+        flowIndicator.className = 'indicator-tag fractal-indicator';
+        flowIndicator.innerHTML = `Order Flow: ${orderFlow}`;
+        indicatorsSection.appendChild(flowIndicator);
+      }
+      
+      // Add signal reason
+      const reasonText = document.createElement('div');
+      reasonText.style.marginTop = '0.5rem';
+      reasonText.style.fontSize = '0.9rem';
+      reasonText.style.color = '#d4d4d4';
+      reasonText.innerHTML = `<strong>Signal Reason:</strong> ${signalReason.join(', ')}`;
+      indicatorsSection.appendChild(reasonText);
+      
+      // Update confidence meter
+      document.getElementById('confidence-value').textContent = `${confidence}%`;
+      document.getElementById('confidence-meter').style.width = `${confidence}%`;
+      
+      // Update TP/SL/RR
+      document.getElementById('take-profit').textContent = takeProfit;
+      document.getElementById('stop-loss').textContent = stopLoss;
+      document.getElementById('risk-reward').textContent = riskReward;
+      
+      // Set expiry time based on timeframe
+      let expiryTime;
+      switch(currentTimeframe) {
+        case '5': expiryTime = '15 minutes'; break;
+        case '15': expiryTime = '30 minutes'; break;
+        case '30': expiryTime = '1 hour'; break;
+        case '60': expiryTime = '2 hours'; break;
+        case '240': expiryTime = '6 hours'; break;
+        case 'D': expiryTime = '2 days'; break;
+        case 'W': expiryTime = '1 week'; break;
+      }
+      document.getElementById('signal-expiry').textContent = expiryTime;
+      
+      // Show notification if there's a trade signal
+      if (signalType !== 'NO TRADE') {
+        showNotification(`New ${signalType} signal for ${currentPair} (${signalReason.join(', ')})`, 
+                        signalType === 'BUY' ? 'success' : 'warning');
+      }
+    }
+    
+    function getTimeframeName(tf) {
+      return tf === '5' ? '5M' :
+             tf === '15' ? '15M' :
+             tf === '30' ? '30M' :
+             tf === '60' ? '1H' :
+             tf === '240' ? '4H' : 
+             tf === 'D' ? '1D' : '1W';
+    }
+
+    // Initialize the app
+    window.onload = function() {
+      const activatedPlan = localStorage.getItem("activatedPlan");
+      if(activatedPlan && validActivationCodes[activatedPlan]) {
+        currentPlan = activatedPlan;
+        
+        document.getElementById("login-container").classList.add("hidden");
+        document.getElementById("dashboard").classList.remove("hidden");
+        document.getElementById("liveBadge").style.display = 'inline-flex';
+        initDashboard();
+      }
+      
+      // Add event listeners for menu buttons
+      document.getElementById('menuBtn').addEventListener('click', function() { toggleMenu(true); });
+      document.getElementById('menuClose').addEventListener('click', function() { toggleMenu(false); });
+      document.getElementById('menuOverlay').addEventListener('click', function() { toggleMenu(false); });
+    };
+  </script>
+</body>
+</html>
